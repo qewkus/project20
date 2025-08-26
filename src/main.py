@@ -22,8 +22,6 @@ class Category:
     category_count = 0
     product_count = 0
 
-
-
     def __init__(self, name, description, products):
         self.name = name
         self.description = description
@@ -32,9 +30,10 @@ class Category:
         Category.category_count += 1
         Category.product_count += len(self.products)
 
+
 def from_json(path: str) -> dict:
     full_path = os.path.abspath(path)
-    with open(full_path, 'r', encoding='utf-8') as file:
+    with open(full_path, "r", encoding="utf-8") as file:
         data_file = json.load(file)
     return data_file
 
@@ -47,8 +46,11 @@ def created_from_json(data_file):
         products_list = []
         for products_data in category_data["products"]:
             products_list.append(Product(**products_data))
-        category_list.append(Category(name=category_data["name"], description=category_data["description"], products=products_list))
+        category_list.append(
+            Category(name=category_data["name"], description=category_data["description"], products=products_list)
+        )
     return category_list
+
 
 if __name__ == "__main__":
     product1 = Product("Samsung Galaxy S23 Ultra", "256GB, Серый цвет, 200MP камера", 180000.0, 5)
@@ -70,9 +72,11 @@ if __name__ == "__main__":
     print(product3.price)
     print(product3.quantity)
 
-    category1 = Category("Смартфоны",
-                         "Смартфоны, как средство не только коммуникации, но и получения дополнительных функций для удобства жизни",
-                         [product1, product2, product3])
+    category1 = Category(
+        "Смартфоны",
+        "Смартфоны, как средство не только коммуникации, но и получения дополнительных функций для удобства жизни",
+        [product1, product2, product3],
+    )
 
     print(category1.name == "Смартфоны")
     print(category1.description)
@@ -80,10 +84,12 @@ if __name__ == "__main__":
     print(category1.category_count)
     print(category1.product_count)
 
-    product4 = Product("55\" QLED 4K", "Фоновая подсветка", 123000.0, 7)
-    category2 = Category("Телевизоры",
-                         "Современный телевизор, который позволяет наслаждаться просмотром, станет вашим другом и помощником",
-                         [product4])
+    product4 = Product('55" QLED 4K', "Фоновая подсветка", 123000.0, 7)
+    category2 = Category(
+        "Телевизоры",
+        "Современный телевизор, который позволяет наслаждаться просмотром, станет вашим другом и помощником",
+        [product4],
+    )
 
     print(category2.name)
     print(category2.description)
