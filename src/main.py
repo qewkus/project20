@@ -1,3 +1,55 @@
+import json
+import os
+
+
+class Product:
+    name: str
+    description: str
+    price: int
+    quantity: int
+
+    def __init__(self, name, description, price, quantity):
+        self.name = name
+        self.description = description
+        self.price = price
+        self.quantity = quantity
+
+
+class Category:
+    name: str
+    description: str
+    products: list
+    category_count = 0
+    product_count = 0
+
+
+
+    def __init__(self, name, description, products):
+        self.name = name
+        self.description = description
+        self.products = products
+
+        Category.category_count += 1
+        Category.product_count += len(self.products)
+
+def from_json(path: str) -> dict:
+    full_path = os.path.abspath(path)
+    with open(full_path, 'r', encoding='utf-8') as file:
+        data_file = json.load(file)
+    return data_file
+
+
+def created_from_json(data_file):
+    category_list = []
+    for category_data in data_file:
+        if isinstance(category_data, str):
+            category_data = json.loads(category_data)
+        products_list = []
+        for products_data in category_data["products"]:
+            products_list.append(Product(**products_data))
+        category_list.append(Category(name=category_data["name"], description=category_data["description"], products=products_list))
+    return category_list
+
 if __name__ == "__main__":
     product1 = Product("Samsung Galaxy S23 Ultra", "256GB, Серый цвет, 200MP камера", 180000.0, 5)
     product2 = Product("Iphone 15", "512GB, Gray space", 210000.0, 8)
@@ -40,3 +92,9 @@ if __name__ == "__main__":
 
     print(Category.category_count)
     print(Category.product_count)
+
+    full_path = from_json("../data/products.json")
+    data_file = created_from_json(full_path)
+    print(data_file[0].name)
+    print(data_file[0].description)
+    print(data_file[0].products)
