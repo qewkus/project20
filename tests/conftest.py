@@ -2,7 +2,7 @@ from typing import List
 
 import pytest
 
-from src.main import Category, Product
+from src.main_14_1 import Category, Product
 
 
 @pytest.fixture
