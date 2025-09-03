@@ -26,7 +26,6 @@ class Product:
             raise ValueError("Цена должна быть положительной и больше нуля")
         self.__price = new_price
 
-
     @classmethod
     def new_product(cls, product_data: Dict[str, Any]) -> "Product":
         """Класс-метод для создания нового продукта из словаря"""
@@ -61,10 +60,9 @@ class Category:
         Category.product_count += 1  # Увеличиваем счетчик продуктов
 
     @property
-    def products(self) -> str:
+    def products(self) -> list[Product]:
         """Геттер для приватного атрибута products"""
         return self.__products
-
 
 
 if __name__ == "__main__":

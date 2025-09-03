@@ -23,10 +23,5 @@ def category(products: List[Product]) -> Category:
 
 
 @pytest.fixture
-def product_data():
-    return Product(
-                name = '55" QLED 4K',
-                description = "Фоновая подсветка",
-                price = 123000.0,
-                quantity = 7
-    )
+def product_data() -> Product:
+    return Product(name='55" QLED 4K', description="Фоновая подсветка", price=123000.0, quantity=7)

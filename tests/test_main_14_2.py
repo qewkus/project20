@@ -2,7 +2,7 @@ from typing import Any, List
 
 import pytest
 
-from src.main_14_2 import Product, Category
+from src.main_14_2 import Category, Product
 
 
 def test_product_init(products: List[Any]) -> None:
@@ -14,13 +14,8 @@ def test_product_init(products: List[Any]) -> None:
     assert product1.quantity == 5
 
 
-def test_new_product():
-    product_data = {
-                    "name":'55" QLED 4K',
-                    "description": "Фоновая подсветка",
-                    "price": 123000.0,
-                    "quantity": 7
-                    }
+def test_new_product() -> None:
+    product_data = {"name": '55" QLED 4K', "description": "Фоновая подсветка", "price": 123000.0, "quantity": 7}
 
     product4 = Product.new_product(product_data)
     assert product4.name == '55" QLED 4K'
@@ -29,11 +24,10 @@ def test_new_product():
     assert product4.quantity == 7
 
 
-def test_getter_price(product_data):
+def test_getter_price(product_data: Product) -> None:
     assert product_data.price == 123000.0
 
-
-def test_setter_price(product_data):
+def test_setter_price(product_data: Product) -> None:
     product_data.price = 100000.0
     assert product_data.price == 100000.0
 
@@ -53,7 +47,7 @@ def test_category_init(category: Any) -> None:
     category = Category(
         "Смартфоны",
         "Смартфоны, как средство не только коммуникации, но и получения дополнительных функций для удобства жизни",
-        [product1, product2, product3]
+        [product1, product2, product3],
     )
     assert category.name == "Смартфоны"
     assert (
@@ -65,7 +59,7 @@ def test_category_init(category: Any) -> None:
     assert category.product_count == 3
 
 
-def test_add_product():
+def test_add_product() -> None:
     Category.category_count = 0
     Category.product_count = 0
     product1 = Product('55" QLED 4K', "Фоновая подсветка", 123000.0, 7)
@@ -80,5 +74,3 @@ def test_add_product():
     category1.add_product(product3)
     assert category1.product_count == 3
     assert product3 in category1._Category__products
-
-
