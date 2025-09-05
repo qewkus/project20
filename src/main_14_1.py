@@ -1,14 +1,15 @@
 import json
 import os
+from typing import Any, Dict, List, Union
 
 
 class Product:
     name: str
     description: str
-    price: int
+    price: Union[int, float]
     quantity: int
 
-    def __init__(self, name, description, price, quantity):
+    def __init__(self, name: str, description: str, price: Union[int, float], quantity: int) -> None:
         self.name = name
         self.description = description
         self.price = price
@@ -18,11 +19,11 @@ class Product:
 class Category:
     name: str
     description: str
-    products: list
-    category_count = 0
-    product_count = 0
+    products: List[Product]
+    category_count: int = 0
+    product_count: int = 0
 
-    def __init__(self, name, description, products):
+    def __init__(self, name: str, description: str, products: List[Product]) -> None:
         self.name = name
         self.description = description
         self.products = products
@@ -31,19 +32,19 @@ class Category:
         Category.product_count += len(self.products)
 
 
-def from_json(path: str) -> dict:
+def from_json(path: str) -> List[Dict[str, Any]]:
     full_path = os.path.abspath(path)
     with open(full_path, "r", encoding="utf-8") as file:
-        data_file = json.load(file)
+        data_file: List[Dict[str, Any]] = json.load(file)
     return data_file
 
 
-def created_from_json(data_file):
-    category_list = []
+def created_from_json(data_file: List[Dict[str, Any]]) -> List[Category]:
+    category_list: List[Category] = []
     for category_data in data_file:
         if isinstance(category_data, str):
             category_data = json.loads(category_data)
-        products_list = []
+        products_list: List[Product] = []
         for products_data in category_data["products"]:
             products_list.append(Product(**products_data))
         category_list.append(

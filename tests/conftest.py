@@ -2,7 +2,7 @@ from typing import List
 
 import pytest
 
-from src.main import Category, Product
+from src.main_14_1 import Category, Product
 
 
 @pytest.fixture
@@ -20,3 +20,8 @@ def category(products: List[Product]) -> Category:
         "Смартфоны, как средство не только коммуникации, но и получения дополнительных функций для удобства жизни",
         products=products,
     )
+
+
+@pytest.fixture
+def product_data() -> Product:
+    return Product(name='55" QLED 4K', description="Фоновая подсветка", price=123000.0, quantity=7)
