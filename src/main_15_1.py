@@ -14,10 +14,10 @@ class Product:
         self.__price = price  # Приватный атрибут цены
         self.quantity = quantity
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f"Название продукта: {self.name}, {self.price} руб. Остаток: {self.quantity} шт."
 
-    def __add__(self, other):
+    def __add__(self, other: 'Product') -> float:
         total_value = (self.price * self.quantity) + (other.price * other.quantity)
         return total_value
 
@@ -61,7 +61,7 @@ class Category:
         Category.category_count += 1
         Category.product_count += len(self.__products)
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f"Название категории: {self.name}, количество продуктов: {self.product_count} шт."
 
     def add_product(self, product: Product) -> None:
