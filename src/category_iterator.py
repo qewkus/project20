@@ -1,15 +1,23 @@
-from src.main_15_1 import Product
+from typing import List, Optional
+
+
+class Product:
+    def __init__(self, name: str, description: str, price: float, stock: int):
+        self.name = name
+        self.description = description
+        self.price = price
+        self.stock = stock
 
 
 class CategoryIterator:
-    def __init__(self, category):
+    def __init__(self, category: "Category"):
         self.category = category
-        self.index = 0
+        self.index: int = 0
 
-    def __iter__(self):
+    def __iter__(self) -> "CategoryIterator":
         return self
 
-    def __next__(self):
+    def __next__(self) -> Product:
         if self.index < len(self.category.products):
             product = self.category.products[self.index]
             self.index += 1
@@ -19,30 +27,29 @@ class CategoryIterator:
 
 
 class Category:
-    category_count = 0
-    product_count = 0
+    category_count: int = 0
+    product_count: int = 0
 
-    def __init__(self, name: str, description: str, products: list = None):
+    def __init__(self, name: str, description: str, products: Optional[List[Product]] = None):
         self.name = name
         self.description = description
-        self.__products = products if products is not None else []
+        self.__products: List[Product] = products if products is not None else []
         Category.category_count += 1
         Category.product_count += len(self.__products)
 
-    def add_product(self, product):
+    def add_product(self, product: Product) -> None:
         self.__products.append(product)
         Category.product_count += 1
 
     @property
-    def products(self):
+    def products(self) -> List[Product]:
         return self.__products
 
-    def __iter__(self):
+    def __iter__(self) -> CategoryIterator:
         return CategoryIterator(self)
 
 
-if __name__ == '__main__':
-
+if __name__ == "__main__":
     product1 = Product('55" QLED 4K', "Фоновая подсветка", 123000.0, 7)
     product2 = Product("Xiaomi Redmi Note 11", "1024GB, Синий", 31000.0, 14)
     category1 = Category(
@@ -51,5 +58,6 @@ if __name__ == '__main__':
         [product1, product2],
     )
 
+    # Перебор товаров в категории
     for product in category1:
         print(f"Название: {product.name}, Цена: {product.price}")
