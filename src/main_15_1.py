@@ -61,18 +61,22 @@ class Category:
         Category.category_count += 1
         Category.product_count += len(self.__products)
 
-    def __str__(self) -> str:
-        return f"Название категории: {self.name}, количество продуктов: {self.product_count} шт."
-
     def add_product(self, product: Product) -> None:
         """Метод для добавления продукта в приватный атрибут products"""
         self.__products.append(product)
         Category.product_count += 1  # Увеличиваем счетчик продуктов
 
     @property
-    def products(self) -> list[Product]:
+    def products(self) -> List[Product]:
         """Геттер для приватного атрибута products"""
         return self.__products
+
+    def total_quantity(self) -> int:
+        """Метод для подсчета общего количества товаров в категории"""
+        return sum(product.quantity for product in self.products)
+
+    def __str__(self) -> str:
+        return f"Название категории: {self.name}, количество продуктов: {self.total_quantity()} шт."
 
 
 # if __name__ == '__main__':
