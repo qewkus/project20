@@ -27,12 +27,13 @@ def test_new_product() -> None:
 def test_getter_price(product_data: Product) -> None:
     assert product_data.price == 123000.0
 
+
 def test_setter_price(product_data: Product) -> None:
     product_data.price = 100000.0
     assert product_data.price == 100000.0
 
 
-def test_setter_decreased_price(product_data):
+def test_setter_decreased_price(product_data: Any) -> None:
     with pytest.raises(ValueError, match="Цена должна быть положительной и больше нуля"):
         Product("Samsung Galaxy S23 Ultra", "256GB, Серый цвет, 200MP камера", -123000.0, 5)
 
