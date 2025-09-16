@@ -1,6 +1,6 @@
 import pytest
 
-from src.main_16_1 import LawnGrass, Smartphone
+from src.main_16_1 import Category, LawnGrass, Smartphone
 
 
 def test_LawnGrass_init(product_grass1: LawnGrass) -> None:
@@ -31,3 +31,17 @@ def test_smartphone_init(product_smartphone1: Smartphone) -> None:
     assert product_smartphone1.model == "S23 Ultra"
     assert product_smartphone1.memory == 256
     assert product_smartphone1.color == "Серый"
+
+
+def test_product_count() -> None:
+    smartphone1 = Smartphone(
+        "Samsung Galaxy S23 Ultra", "256GB, Серый цвет, 200MP камера", 180000.0, 5, 95.5, "S23 Ultra", 256, "Серый"
+    )
+    grass1 = LawnGrass("Газонная трава", "Элитная трава для газона", 500.0, 20, "Россия", "7 дней", "Зеленый")
+
+    category_smartphones = Category("Смартфоны", "Высокотехнологичные смартфоны", [smartphone1])
+    category_grass = Category("Газонная трава", "Различные виды газонной травы", [grass1])
+
+    total_count = len(category_smartphones.products) + len(category_grass.products)
+
+    assert Category.product_count == total_count
