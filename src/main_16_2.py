@@ -1,9 +1,10 @@
 from typing import Any, Dict, List, Optional, Union
 
 from src.base_product import BaseProduct
+from src.print_mixin import PrintMixin
 
 
-class Product(BaseProduct):
+class Product(BaseProduct, PrintMixin):
     name: str
     description: str
     quantity: int
@@ -15,6 +16,7 @@ class Product(BaseProduct):
             raise ValueError("Цена должна быть положительной и больше нуля")
         self.__price = price  # Приватный атрибут цены
         self.quantity = quantity
+        super().__init__()
 
     def __str__(self) -> str:
         return f"Название продукта: {self.name}, {self.price} руб. Остаток: {self.quantity} шт."
@@ -156,7 +158,7 @@ if __name__ == "__main__":
     print(category1.category_count)
     print(category1.product_count)
 
-    product4 = Product('55" QLED 4K', "Фоновая подсветка", 123000.0, 7)
+    product4 = Product("55 QLED 4K", "Фоновая подсветка", 123000.0, 7)
     category2 = Category(
         "Телевизоры",
         "Современный телевизор, который позволяет наслаждаться просмотром, станет вашим другом и помощником",
