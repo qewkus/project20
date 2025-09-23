@@ -1,6 +1,8 @@
 from _pytest.capture import CaptureFixture
 
-from src.main_16_2 import LawnGrass, Product, Smartphone
+from src.lawngrass import LawnGrass
+from src.product import Product
+from src.smartphone import Smartphone
 
 
 def test_print_mixin(capsys: CaptureFixture[str]) -> None:

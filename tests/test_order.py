@@ -1,5 +1,5 @@
-from src.main_16_2 import Product
 from src.order import Order
+from src.product import Product
 
 
 def test_order_init(product: Product) -> None:

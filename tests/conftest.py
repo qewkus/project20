@@ -1,31 +1,49 @@
-from typing import List
-
 import pytest
 
-from src.main_14_1 import Category, Product
-from src.main_16_1 import LawnGrass, Smartphone
+from src.category import Category
+from src.lawngrass import LawnGrass
+from src.product import Product
+from src.product_iterator import ProductIterator
+from src.smartphone import Smartphone
 
 
 @pytest.fixture
-def products() -> List[Product]:
-    product1 = Product("Samsung Galaxy S23 Ultra", "256GB, Серый цвет, 200MP камера", 180000.0, 5)
-    product2 = Product("Iphone 15", "512GB, Gray space", 210000.0, 8)
-    product3 = Product("Xiaomi Redmi Note 11", "1024GB, Синий", 31000.0, 14)
-    return [product1, product2, product3]
-
-
-@pytest.fixture
-def category(products: List[Product]) -> Category:
+def first_category() -> Category:
     return Category(
-        "Смартфоны",
-        "Смартфоны, как средство не только коммуникации, но и получения дополнительных функций для удобства жизни",
-        products=products,
+        name="Смартфоны",
+        description="Смартфоны, как средство не только коммуникации, но и получения дополнительных функций",
+        products=[
+            Product("Samsung Galaxy S23 Ultra", "256GB, Серый цвет, 200MP камера", 180000.0, 5),
+            Product("Iphone 15", "512GB, Gray space", 210000.0, 8),
+            Product("Xiaomi Redmi Note 11", "1024GB, Синий", 31000.0, 14),
+        ],
     )
 
 
 @pytest.fixture
-def product_data() -> Product:
-    return Product(name='55" QLED 4K', description="Фоновая подсветка", price=123000.0, quantity=7)
+def second_category() -> Category:
+    return Category(
+        name="Телевизоры",
+        description="Современный телевизор, который позволяет наслаждаться просмотром, станет вашим другом",
+        products=[Product('55" QLED 4K', "Фоновая подсветка", 123000.0, 7)],
+    )
+
+
+@pytest.fixture
+def product() -> Product:
+    return Product(
+        name="Samsung Galaxy S23 Ultra", description="256GB, Серый цвет, 200MP камера", price=180000.0, quantity=5
+    )
+
+
+@pytest.fixture
+def other_product() -> Product:
+    return Product(name="Iphone 15", description="512GB, Gray space", price=210000.0, quantity=8)
+
+
+@pytest.fixture
+def product_iterator(first_category: Category) -> ProductIterator:
+    return ProductIterator(first_category)
 
 
 @pytest.fixture

@@ -1,4 +1,4 @@
-from src.main_16_2 import Product
+from src.product import Product
 from src.warehouse import WareHouse
 
 
